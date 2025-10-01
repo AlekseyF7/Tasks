@@ -14,4 +14,5 @@ student_score = int(input('Введите баллы Стаса: '))
 if student_score not in scores:
     scores.append(student_score)
 result = check_winners(scores, student_score)
+
 print(result)
