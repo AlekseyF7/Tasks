@@ -1,34 +1,38 @@
 import random
 
-def main():
-    num = random.randint(1,101)
-    print('Игра угадай число')
-
-    try_one = int(input('Первая попытка! Введите число: '))
-    if try_one == num:
+def trys(num, k):
+    num, k = num, k
+    try_ = int(input(f'{k} попытка. Введите число: '))
+    if try_ == num:
         print('Вы угадали число!')
+        return True
     else:
-        if try_one > num:
+        if k == 1 and try_ > num:
             print('Загаданное число меньше')
-        else:
+        elif k ==1 and try_ < num:
             print('Загаданное число больше')
-            try_two = int(input('Вторая попытка! Введите число: '))
-            if try_two == num:
-                print('Вы угадали число!')
-            else:
-                if num % 2 == 0:
-                    print('Загаданное число чётное. Осталась 1 попытка!')
-                else:
-                    print('Загаданное число нечётное. Осталась 1 попытка!')
-                    try_three = int(input('Третья попытка! Введите число: '))
-                    if try_three == num:
-                        print("Вы угадали число!")
-                    else:
-                        print("Неправильно. Попытки кончились")
+        if k == 2 and num % 2 == 0:
+            print('Загаданное число чётное.')
+        elif k == 2 and num % 2 != 0:
+            print('Загаданное число нечётное.')
+        if k >= 3:
+            print(f"Попытки кончились. Загаданное число это: {num}")
+
+
+def main():
+    k = 0
+    num = random.randint(1,3)
+    print('Игра угадай число')
+    print("Программа загадывает число и у Вас есть 3 попытки его угадать")
+    while k < 3:
+        k += 1
+        func = trys(num, k)
+        if func == True:
+            break
 
 while True:
     main()
-    restart = input("Хотите перезапустить программу? (y/n): ").lower()
+    restart = input("Хотите попробовать еще раз? (y/n): ").lower()
     if restart != 'y':
-        print("Выход из программы.")
+        print("Выход из игры.")
         break
