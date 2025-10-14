@@ -1,7 +1,6 @@
 import random
 
 def trys(num, k):
-    num, k = num, k
     try_ = int(input(f'{k} попытка. Введите число: '))
     if try_ == num:
         print('Вы угадали число!')
@@ -16,7 +15,7 @@ def trys(num, k):
         elif k == 2 and num % 2 != 0:
             print('Загаданное число нечётное.')
         if k >= 3:
-            print(f"Попытки кончились. Загаданное число это: {num}")
+            print(f"Попытки кончились. Загаданным числом было: {num}")
 
 
 def main():
@@ -26,8 +25,7 @@ def main():
     print("Программа загадывает число и у Вас есть 3 попытки его угадать")
     while k < 3:
         k += 1
-        func = trys(num, k)
-        if func == True:
+        if trys(num, k):
             break
 
 while True:
