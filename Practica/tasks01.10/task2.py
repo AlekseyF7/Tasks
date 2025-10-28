@@ -1,3 +1,4 @@
+#задача про Стаса
 import random
 
 def check_winners(scores, student_score):
