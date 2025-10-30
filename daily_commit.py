@@ -2,7 +2,6 @@ import os
 import datetime
 import subprocess
 
-
 REPO_PATH = "/Users/aleksey/ProjectsVS/Tasks"
 FILE_NAME = "daily_log.md"
 
@@ -12,9 +11,10 @@ def make_daily_commit():
         # Переходим в репозиторий
         os.chdir(REPO_PATH)
 
-        # сначала тянем изменения с GitHub
-        print("🔄 Получаем свежие изменения с GitHub...")
-        subprocess.run(["git", "pull", "origin", "main"])
+        print("Принудительно обновляем репозиторий...")
+        # Сбрасываем все локальные изменения и берем версию с GitHub
+        subprocess.run(["git", "fetch", "origin"])
+        subprocess.run(["git", "reset", "--hard", "origin/main"])
 
         # Получаем текущее время
         now = datetime.datetime.now()
@@ -28,7 +28,6 @@ def make_daily_commit():
         subprocess.run(["git", "add", FILE_NAME])
         subprocess.run(["git", "commit", "-m", f"Daily commit: {date_str}"])
 
-        # Пушим изменения
         print("Отправляем изменения на GitHub...")
         subprocess.run(["git", "push", "origin", "main"])
 
