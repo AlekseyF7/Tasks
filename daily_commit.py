@@ -2,29 +2,40 @@ import os
 import datetime
 import subprocess
 
-# Настройки
+
 REPO_PATH = "/Users/aleksey/ProjectsVS/Tasks"
 FILE_NAME = "daily_log.md"
 
 
 def make_daily_commit():
-    # Переходим в репозиторий
-    os.chdir(REPO_PATH)
+    try:
+        # Переходим в репозиторий
+        os.chdir(REPO_PATH)
 
-    # Получаем текущее время
-    now = datetime.datetime.now()
-    date_str = now.strftime("%Y-%m-%d %H:%M:%S")
+        # сначала тянем изменения с GitHub
+        print("🔄 Получаем свежие изменения с GitHub...")
+        subprocess.run(["git", "pull", "origin", "main"])
 
-    # Записываем в файл
-    with open(FILE_NAME, "a") as f:  # "a" - добавление в конец файла
-        f.write(f"- Auto-commit: {date_str}\n")
+        # Получаем текущее время
+        now = datetime.datetime.now()
+        date_str = now.strftime("%Y-%m-%d %H:%M:%S")
 
-    # Git команды
-    subprocess.run(["git", "add", FILE_NAME])
-    subprocess.run(["git", "commit", "-m", f"Daily commit: {date_str}"])
-    subprocess.run(["git", "push", "origin", "main"])
+        # Записываем в файл
+        with open(FILE_NAME, "a") as f:
+            f.write(f"- Auto-commit: {date_str}\n")
 
-    print(f"✅ Коммит создан: {date_str}")
+        # Git команды
+        subprocess.run(["git", "add", FILE_NAME])
+        subprocess.run(["git", "commit", "-m", f"Daily commit: {date_str}"])
+
+        # Пушим изменения
+        print("Отправляем изменения на GitHub...")
+        subprocess.run(["git", "push", "origin", "main"])
+
+        print(f"✅ Коммит создан и отправлен: {date_str}")
+
+    except Exception as e:
+        print(f"❌ Ошибка: {e}")
 
 
 if __name__ == "__main__":
