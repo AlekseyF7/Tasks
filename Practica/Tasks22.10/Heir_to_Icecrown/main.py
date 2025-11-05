@@ -24,9 +24,7 @@ def main():
     scene_1_sword(player)
 
     print('---------------')
-    if not scene_2_battle_one(player):
-        print("Вы проиграли.")
-        return
+    scene_2_battle_one(player)
 
     print('---------------')
     scene_3_betrayal(name_hero)
