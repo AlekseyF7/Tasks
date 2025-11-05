@@ -53,9 +53,9 @@ def scene_2_battle_one(player):
     print('"Убить..." — хрипят они.')
     print()
     # Битва с нежитью
-    if fight_undead_ambush(player):
+    if not fight_undead_ambush(player):
         print("Игра окончена.")
-        return
+        exit()
 
 def scene_3_betrayal(name_hero):
     # ======== СЦЕНА 3: ЛАБОРАТОРИЯ КЕЛДРИСА =======
@@ -87,7 +87,7 @@ def scene_4_battle_two(player):
     # Финальная битва
     if not fight_dragon(player):
         print("Игра окончена.")
-        return
+        exit()
 
 def scene_5_final():
     # ======= СЦЕНА 5: СУДЬБА ДРАКОНА ======
