@@ -66,7 +66,7 @@ class Dragon(Character):
     """Сарторакс - Дракон Смерти из 2 битвы"""
     def __init__(self):
         # Обычная атака: 30–40
-        super().__init__(name='Сарторакс', hp=300, min_attack=30, max_attack=40)
+        super().__init__(name='Сарторакс', hp=200, min_attack=30, max_attack=40)
         self.phase = 1 # Фаза боя (в будущем)
 
     def roar(self) -> int:

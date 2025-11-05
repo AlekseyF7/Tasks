@@ -54,7 +54,7 @@ def dragon_blackjack(player_name="Рыцарь"):
             new_total = calculate_hand(player_hand)
             print(f"Ты взял: {card} --> Всего: {new_total}")
             if new_total > 21:
-                print("💥 Перебор! Ты проиграл.")
+                print("Перебор! Ты проиграл.")
                 return False
         elif action == 's':
             break
