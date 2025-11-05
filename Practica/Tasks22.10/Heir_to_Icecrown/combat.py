@@ -1,17 +1,18 @@
 from characters import Knight, Undead_Warrior, Dragon
+import random
 
 
 def     fight_undead_ambush(player: Knight):
     """Битва с волной восставших рыцарей (1 битва)"""
 
     # Создаём врагов
-    undead_army = [Undead_Warrior() for _ in range(5)]
+    undead_army = [Undead_Warrior() for _ in range(3)]
     print(f'\nПротив тебя - {len(undead_army)} восставших рыцаря!')
 
     while len(undead_army) > 0 and player.is_alive():
         # Показываемм статус
         print(f'\nСер {player.name}: {player.hp}/{player.max_hp} HP | Честь: {player.honor}')
-        if len(undead_army) < 5:
+        if len(undead_army) < 3:
             print(f'\nОтсалось {len(undead_army)} восставших рыцаря')
 
         # Выбор действия
@@ -67,7 +68,7 @@ def fight_dragon(player: Knight):
         print("1. Атаковать мечом")
         if player.lich_sword:
             print("2. Использовать силу меча Артаса")
-        print("3. Защититься (восстановить 15 HP)")
+        print("3. Защититься (восстановить 66 HP)")
 
         choice = input("Ваш выбор: ").strip()
 
@@ -81,7 +82,7 @@ def fight_dragon(player: Knight):
             dragon.take_damage(damage)
             print(f"Ледяной шторм! Нанесено {damage} урона!")
         elif choice == "3":
-            player.heal(15)
+            player.heal(66)
             print("Ты прикрываешься щитом и восстанавливаешь здоровье.")
         else:
             print("Ты теряешь ход!")
@@ -89,17 +90,17 @@ def fight_dragon(player: Knight):
             # Атака дракона (если жив)
         if dragon.is_alive():
             # Иногда дракон ревёт (сильная атака)
-            import random
             if random.random() < 0.3:
                 damage = dragon.roar()
                 print("Сарторакс выпускает яростный рёв!")
+                player.take_damage(damage)
             else:
                 damage = dragon.get_attack_damage()
                 print("Сарторакс атакует когтями!")
-            player.take_damage(damage)
+                player.take_damage(damage)
 
         if not player.is_alive():
             print("\nТы пал... но Сарторакс улетел в небо.")
             return False
-        print("\nСарторакс падает на лёд. Он жив... но побеждён.")
-        return True
+    print("\nСарторакс падает на лёд. Он жив... но побеждён.")
+    return True
