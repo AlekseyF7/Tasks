@@ -1,0 +1,134 @@
+{
+  "species_statistics": {
+    "setosa": {
+      "sepal length (cm)": {
+        "mean": 5.006,
+        "std": 0.35248968721345136,
+        "min": 4.3,
+        "max": 5.8
+      },
+      "sepal width (cm)": {
+        "mean": 3.428,
+        "std": 0.3790643690962887,
+        "min": 2.3,
+        "max": 4.4
+      },
+      "petal length (cm)": {
+        "mean": 1.4620000000000002,
+        "std": 0.17366399648018407,
+        "min": 1.0,
+        "max": 1.9
+      },
+      "petal width (cm)": {
+        "mean": 0.24599999999999997,
+        "std": 0.10538558938004565,
+        "min": 0.1,
+        "max": 0.6
+      }
+    },
+    "versicolor": {
+      "sepal length (cm)": {
+        "mean": 5.936,
+        "std": 0.5161711470638634,
+        "min": 4.9,
+        "max": 7.0
+      },
+      "sepal width (cm)": {
+        "mean": 2.7700000000000005,
+        "std": 0.3137983233784114,
+        "min": 2.0,
+        "max": 3.4
+      },
+      "petal length (cm)": {
+        "mean": 4.26,
+        "std": 0.46991097723995795,
+        "min": 3.0,
+        "max": 5.1
+      },
+      "petal width (cm)": {
+        "mean": 1.3259999999999998,
+        "std": 0.19775268000454405,
+        "min": 1.0,
+        "max": 1.8
+      }
+    },
+    "virginica": {
+      "sepal length (cm)": {
+        "mean": 6.587999999999998,
+        "std": 0.6358795932744322,
+        "min": 4.9,
+        "max": 7.9
+      },
+      "sepal width (cm)": {
+        "mean": 2.974,
+        "std": 0.32249663817263746,
+        "min": 2.2,
+        "max": 3.8
+      },
+      "petal length (cm)": {
+        "mean": 5.5520000000000005,
+        "std": 0.5518946956639834,
+        "min": 4.5,
+        "max": 6.9
+      },
+      "petal width (cm)": {
+        "mean": 2.0260000000000002,
+        "std": 0.2746500556366674,
+        "min": 1.4,
+        "max": 2.5
+      }
+    }
+  },
+  "correlation_matrix": {
+    "sepal length (cm)": {
+      "sepal length (cm)": 1.0,
+      "sepal width (cm)": -0.11756978413300091,
+      "petal length (cm)": 0.8717537758865838,
+      "petal width (cm)": 0.8179411262715759
+    },
+    "sepal width (cm)": {
+      "sepal length (cm)": -0.11756978413300091,
+      "sepal width (cm)": 1.0,
+      "petal length (cm)": -0.4284401043305387,
+      "petal width (cm)": -0.36612593253643755
+    },
+    "petal length (cm)": {
+      "sepal length (cm)": 0.8717537758865838,
+      "sepal width (cm)": -0.4284401043305387,
+      "petal length (cm)": 1.0,
+      "petal width (cm)": 0.9628654314027961
+    },
+    "petal width (cm)": {
+      "sepal length (cm)": 0.8179411262715759,
+      "sepal width (cm)": -0.36612593253643755,
+      "petal length (cm)": 0.9628654314027961,
+      "petal width (cm)": 1.0
+    }
+  },
+  "highest_correlation_pair": [
+    "petal length (cm)",
+    "petal width (cm)"
+  ],
+  "feature_differences": {
+    "sepal length (cm)": {
+      "max_mean": 6.587999999999999,
+      "min_mean": 5.006,
+      "difference": 1.581999999999999
+    },
+    "sepal width (cm)": {
+      "max_mean": 3.428,
+      "min_mean": 2.77,
+      "difference": 0.6579999999999999
+    },
+    "petal length (cm)": {
+      "max_mean": 5.5520000000000005,
+      "min_mean": 1.462,
+      "difference": 4.090000000000001
+    },
+    "petal width (cm)": {
+      "max_mean": 2.026,
+      "min_mean": 0.24600000000000002,
+      "difference": 1.7799999999999998
+    }
+  }
+}
