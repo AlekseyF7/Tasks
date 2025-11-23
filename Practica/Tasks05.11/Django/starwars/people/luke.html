@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }} | Звёздные Войны</title>
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --highlight-color: #e94560;
+            --text-color: #f0f0f0;
+            --gold-color: #ffd700;
+            --blue-color: #4d9de0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(15, 52, 96, 0.3) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(233, 69, 96, 0.2) 0%, transparent 20%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--gold-color);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--blue-color);
+            margin-bottom: 2rem;
+        }
+        
+        .character-card {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .character-header {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .character-image {
+            flex: 0 0 250px;
+            height: 300px;
+            background: linear-gradient(45deg, #2c3e50, #4ca1af);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 2rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .character-basic-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .character-name {
+            font-size: 2.5rem;
+            color: var(--gold-color);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .character-tagline {
+            font-size: 1.2rem;
+            color: var(--blue-color);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .character-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .stat {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--highlight-color);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--blue-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .character-details {
+            padding: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--gold-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: var(--blue-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-value {
+            font-size: 1.1rem;
+        }
+        
+        .lists {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .list {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+        
+        .list-item {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--blue-color);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .character-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .character-image {
+                margin-right: 0;
+                margin-bottom: 2rem;
+                width: 100%;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(233, 69, 96, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(233, 69, 96, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">Звёздные Войны</div>
+            <div class="subtitle">База данных персонажей</div>
+        </header>
+        
+        <main>
+            <div class="character-card">
+                <div class="character-header">
+                    <div class="character-image pulse">
+                        <!-- В реальном проекте здесь будет изображение персонажа -->
+                        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: linear-gradient(45deg, #2c3e50, #4ca1af); color: white; font-size: 1.2rem;">
+                            Изображение Люка Скайуокера
+                        </div>
+                    </div>
+                    <div class="character-basic-info">
+                        <h1 class="character-name">Люк Скайуокер</h1>
+                        <p class="character-tagline">"Сила будет с тобой. Всегда."</p>
+                        
+                        <div class="character-stats">
+                            <div class="stat">
+                                <div class="stat-label">Рост</div>
+                                <div class="stat-value">{{height}}</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">Вес</div>
+                                <div class="stat-value">{{mass}}</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">Год рождения</div>
+                                <div class="stat-value">{{birth_year}}</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">Пол</div>
+                                <div class="stat-value">{{gender}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="character-details">
+                    <h2 class="section-title">Основная информация</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Цвет волос</div>
+                            <div class="info-value">{{hair_color}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Цвет кожи</div>
+                            <div class="info-value">{{skin_color}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Цвет глаз</div>
+                            <div class="info-value">{{eye_color}}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Родная планета</div>
+                            <div class="info-value">Татуин</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lists">
+                        <div class="list">
+                            <h3 class="section-title">Фильмы</h3>
+                            <div class="list-item">Эпизод IV: Новая надежда</div>
+                            <div class="list-item">Эпизод V: Империя наносит ответный удар</div>
+                            <div class="list-item">Эпизод VI: Возвращение джедая</div>
+                            <div class="list-item">Эпизод I: Скрытая угроза</div>
+                        </div>
+                        
+                        <div class="list">
+                            <h3 class="section-title">Транспортные средства</h3>
+                            {% for ve
+                            <div class="list-item">Снегоход</div>
+                            <div class="list-item">Летательный аппарат имперского штурмовика</div>
+                        </div>
+                        
+                        <div class="list">
+                            <h3 class="section-title">Звёздные корабли</h3>
+                            <div class="list-item">X-wing истребитель</div>
+                            <div class="list-item">Имперский шаттл</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Информация предоставлена SWAPI - The Star Wars API</p>
+            <p>© 2023 База данных Звёздных Войн</p>
+        </footer>
+    </div>
+
+    <script>
+        // Создание звёздного фона
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                const opacity = Math.random() * 0.7 + 0.3;
+                star.style.opacity = opacity.toString();
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Запуск при загрузке страницы
+        window.addEventListener('DOMContentLoaded', createStars);
+    </script>
+</body>
+</html>
