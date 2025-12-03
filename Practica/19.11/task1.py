@@ -1,11 +1,12 @@
 import requests
 
 # TASK 1
-def send_request(url):
+# функция отправки запроса
+def send_request(url:str):
     response = requests.get(url) #отправляет запрос
     if response.status_code == 200: #проеряем код ответа
         return response.json() # возвращаем словарь
-    return False # не возвращаем ничего
+    return None # не возвращаем ничего
 
 
 def main():

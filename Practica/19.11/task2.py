@@ -2,11 +2,12 @@ import requests
 import json
 
 # TASK 2
-def send_request(url):
+# функция отправки запроса
+def send_request(url:str):
     response = requests.get(url) #отправляет запрос
     if response.status_code == 200: #проеряем код ответа
         return response.json() # возвращаем словарь
-    return False # не возвращаем ничего
+    return None # не возвращаем ничего
 
 def save_data(data):
     with open('data.json', mode='w', encoding='utf-8') as file:
@@ -14,32 +15,22 @@ def save_data(data):
 
 
 def update_data(data):
-    # итоговый словарь
-    # для элемента в списке дата
-        # итоговый словарь[индекс] = элемент
-    # вернуть данные
-    result = {}
-    for index, element in enumerate(data):
-        result[index] = element
-    return result
+    character_dict = {}
+    for index, el in enumerate(data):
+        character_dict[str(index)] = el
+    return character_dict
 
 def main():
-    url = "https://swapi.dev/api/people/1"
-    # список
-    characters = []
-    # выполните 82 раза
+    main_url = "https://swapi.dev/api/people/"
+    character_list = list()
     for i in range(1, 83):
-        # данные = запрос по api человека с id = итерация цикла
-        url = f"https://swapi.dev/api/people/{i}"
+        url = main_url + str(i)
         data = send_request(url)
-        # проверяем что строка вернулась не пустота
-        if data:  # если данные не None
-            # добавляем в список персонажей
-            characters.append(data)
+        if data:
+            character_list.append(data)
 
-    # Обновляем данные в словарь
-    updated = update_data(characters)
-    save_data(updated)
+    updated_data = update_data(character_list)
+    save_data(updated_data)
 
 
 if __name__ == '__main__':
