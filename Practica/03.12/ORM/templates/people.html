@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Звёздные Войны — Персонажи</title>
+    <style>
+        /* Звёздные Войны стиль */
+        body {
+            background-color: #000;
+            color: #ffcc00;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://starwarsblog.starwars.com/wp-content/uploads/2020/07/starwars-backgrounds-1920x1080.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ffcc00;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #ffcc00;
+        }
+
+        .character {
+            background-color: rgba(30, 30, 30, 0.9);
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid #ffcc00;
+            border-radius: 5px;
+        }
+
+        .character h2 {
+            margin: 0 0 10px;
+            color: #fff;
+            font-size: 1.6em;
+        }
+
+        .character p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+
+        .character .label {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        /* Анимация текста "бегущей строки" как в начале эпизода */
+        .intro {
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Персонажи Вселенной Звёздных Войн</h1>
+
+        <div class="intro">Далекая-далекая галактика...</div>
+
+        {% for character in people_list %}
+        <a href="{% url 'character' pk=character.pk %}">
+            <div class="character">
+                <h2>{{ character.name }}</h2>
+                <p><span class="label">Рост:</span> {{ character.height }} см</p>
+                <p><span class="label">Родной мир:</span> {{ character.homeworld }}</p>
+            </div>
+        </a>
+        {% endfor %}
+
+        <footer>
+            &copy; {{ current_year }} Вселенная Звёздных Войн. Все права принадлежат Lucasfilm Ltd.
+        </footer>
+    </div>
+
+    <script>
+        // Небольшая анимация: мигание заголовка
+        document.addEventListener('DOMContentLoaded', () => {
+            const title = document.querySelector('h1');
+            setInterval(() => {
+                title.style.opacity = title.style.opacity === '0.7' ? '1' : '0.7';
+            }, 800);
+        });
+    </script>
+</body>
+</html>

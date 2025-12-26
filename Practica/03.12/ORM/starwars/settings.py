@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'people',
+    'starships',
 ]
 
 MIDDLEWARE = [
@@ -76,10 +77,13 @@ WSGI_APPLICATION = 'starwars.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # К проекту по умолчанию подключена СУБД SQLite:
+        'ENGINE' : 'django.db.backends.sqlite3',
+        # Файл с базой данных находится в одной папке с manage. ру.
+        'NAME': BASE_DIR / 'empite_db.sqlite3',
     }
 }
+
 
 
 # Password validation
@@ -104,9 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ekaterinburg'
 
 USE_I18N = True
 
@@ -121,11 +125,4 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
-DATABASES = {
-    'default': {
-        # К проекту по умолчанию подключена СУБД SQLite:
-        'ENGINE' : 'django.db. backends.sqlite3',
-        # Файл с базой данных находится в одной папке с manage. ру.
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

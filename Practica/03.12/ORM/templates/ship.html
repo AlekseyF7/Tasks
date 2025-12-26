@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ starship.name }} — Звёздные Войны</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #ffcc00;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://starwarsblog.starwars.com/wp-content/uploads/2020/07/starwars-backgrounds-1920x1080.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border: 2px solid #ffcc00;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.6);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.6em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            text-shadow: 0 0 12px #ffcc00;
+            color: #fff;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .info-item {
+            background-color: rgba(30, 30, 30, 0.92);
+            padding: 14px;
+            border-radius: 8px;
+            border-left: 3px solid #ffcc00;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #ffcc00;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .info-value {
+            color: #fff;
+            font-size: 1.05em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .container {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ starship.name }}</h1>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Модель</span>
+                <span class="info-value">{{ starship.model }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Производитель</span>
+                <span class="info-value">{{ starship.manufacturer }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Стоимость</span>
+                <span class="info-value">{{ starship.cost_in_credits }} кредитов</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Длина</span>
+                <span class="info-value">{{ starship.length }} м</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Макс. скорость (в атмосфере)</span>
+                <span class="info-value">{{ starship.max_atmosphering_speed }} км/ч</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Экипаж</span>
+                <span class="info-value">{{ starship.crew }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Пассажиры</span>
+                <span class="info-value">{{ starship.passengers }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Грузоподъёмность</span>
+                <span class="info-value">{{ starship.cargo_capacity }} кг</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Запасы</span>
+                <span class="info-value">{{ starship.consumables }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Гипердвигатель</span>
+                <span class="info-value">{{ starship.hyperdrive_rating }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">MGLT</span>
+                <span class="info-value">{{ starship.MGLT }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Класс корабля</span>
+                <span class="info-value">{{ starship.starship_class|title }}</span>
+            </div>
+        </div>
+
+        <footer>
+            &copy; {{ current_year }} Звёздные Войны. Все данные взяты из архивов Галактической Республики.
+        </footer>
+    </div>
+
+    <script>
+        // Мягкое мерцание заголовка — как звёзды в далёкой галактике
+        document.addEventListener('DOMContentLoaded', () => {
+            const title = document.querySelector('h1');
+            setInterval(() => {
+                title.style.textShadow = title.style.textShadow === '0 0 12px #ffcc00'
+                    ? '0 0 20px #ffcc00, 0 0 30px #ff9900'
+                    : '0 0 12px #ffcc00';
+            }, 1200);
+        });
+    </script>
+</body>
+</html>

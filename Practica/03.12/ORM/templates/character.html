@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ character.name }} — Звёздные Войны</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #ffcc00;
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://starwarsblog.starwars.com/wp-content/uploads/2020/07/starwars-backgrounds-1920x1080.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 25px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border: 2px solid #ffcc00;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.6);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            text-shadow: 0 0 12px #ffcc00;
+            color: #fff;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-item {
+            background-color: rgba(30, 30, 30, 0.9);
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #ffcc00;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #ffcc00;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            color: #fff;
+            font-size: 1.05em;
+        }
+
+        .starships-section {
+            margin-top: 25px;
+        }
+
+        .starships-section h2 {
+            color: #ffcc00;
+            font-size: 1.6em;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .starships-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .starships-list li {
+            background-color: rgba(40, 40, 40, 0.9);
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            border-left: 3px solid #ff9900;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        /* Эффект появления */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            animation: fadeIn 1.2s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ character.name }}</h1>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Рост</span>
+                <span class="info-value">{{ character.height }} см</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Масса</span>
+                <span class="info-value">{{ character.mass }} кг</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Цвет волос</span>
+                <span class="info-value">{{ character.hair_color|title }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Цвет кожи</span>
+                <span class="info-value">{{ character.skin_color|title }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Цвет глаз</span>
+                <span class="info-value">{{ character.eye_color|title }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Год рождения</span>
+                <span class="info-value">{{ character.birth_year }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Пол</span>
+                <span class="info-value">{{ character.gender|title }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Родной мир</span>
+                <span class="info-value">{{ character.homeworld }}</span>
+            </div>
+        </div>
+
+        <div class="starships-section">
+            <h2>Корабли</h2>
+            {% if character.starships %}
+                <ul class="starships-list">
+                    {% for ship in starships %}
+                        <a href="{% url 'starship' pk=ship.pk %}">
+                            <li>{{ ship }}</li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="info-value">Нет известных кораблей.</p>
+            {% endif %}
+        </div>
+
+
+    </div>
+
+    <script>
+        // Небольшая анимация: мерцание заголовка
+        document.addEventListener('DOMContentLoaded', () => {
+            const h1 = document.querySelector('h1');
+            let brightness = 1;
+            setInterval(() => {
+                brightness = brightness === 1 ? 0.85 : 1;
+                h1.style.opacity = brightness;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
